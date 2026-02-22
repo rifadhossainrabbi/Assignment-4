@@ -16,28 +16,26 @@ jobNumber.innerText = allChildNumber.children.length;
  * 3-remove all bg blue
  * 4-design only selected button(add and remove)
  */
-
-
 function designOnly(id) {
   // button effect after click
   // Get the buttons
   const allButton = document.getElementById("all_btn");
   const interviewButton = document.getElementById("interview_btn");
   const rejectButton = document.getElementById("reject_btn");
-  
+
   // bg white adding all button
   allButton.classList.add('bg-white', 'text-gray-500');
   interviewButton.classList.add('bg-white', 'text-gray-500');
   rejectButton.classList.add('bg-white', 'text-gray-500');
-  
+
   // Remove
   allButton.classList.remove('bg-blue-500', 'text-white');
   interviewButton.classList.remove('bg-blue-500', 'text-white');
   rejectButton.classList.remove('bg-blue-500', 'text-white');
-  
+
   // design only selected button
   const selectButton = document.getElementById(id);
-  
+
   selectButton.classList.add('bg-blue-500', 'text-white');
   selectButton.classList.remove("bg-white", "text-gray-500");
 }
@@ -61,3 +59,43 @@ function showOnly(id2) {
   const selectId2 = document.getElementById(id2);
   selectId2.classList.remove("hidden");
 }
+
+// Click Interview or Rejected button and change status from card
+/**
+ * Get All Card Sections 
+ */
+
+let interviewList = [];
+let rejectList = [];
+
+const allCardSection = document.getElementById("all_card_sections");
+allCardSection.addEventListener("click", function (event) {
+  // console.log(event.target.parentNode);
+  if (event.target.classList.contains("interview_btn")) {
+    const parentNode = event.target.parentNode.parentNode;
+    const companyName = parentNode.querySelector('.company_name').innerText;
+    const skillHave = parentNode.querySelector('.skill').innerText;
+    const extraInfo = parentNode.querySelector('.extra_info').innerText;
+    const clickedButton = parentNode.querySelector('.clicked').innerText;
+    const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
+
+    const cardItems = {
+      companyName,
+      skillHave,
+      extraInfo,
+      clickedButton,
+      paragraphsHave
+    }
+    console.log(cardItems);
+
+
+    // Clicked and change the status
+    const status = document.querySelector(".clicked");
+    // console.log(status.innerText);
+    status.innerText = 'Interview';
+    status.classList.add('text-green-300','border','bg-white');
+    const interviewBtn = document.getElementById("interview_btn_select");
+    interviewBtn.classList.add('bg-green-300','text-white');
+    interviewBtn.classList.remove('border');
+  }
+})
