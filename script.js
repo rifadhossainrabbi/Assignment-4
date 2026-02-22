@@ -88,14 +88,10 @@ allCardSection.addEventListener("click", function (event) {
     }
     console.log(cardItems);
 
-
-    // Clicked and change the status
-    const status = document.querySelector(".clicked");
-    // console.log(status.innerText);
-    status.innerText = 'Interview';
-    status.classList.add('text-green-300','border','bg-white');
-    const interviewBtn = document.getElementById("interview_btn_select");
-    interviewBtn.classList.add('bg-green-300','text-white');
-    interviewBtn.classList.remove('border');
+    const status = parentNode.querySelector(".clicked");
+    status.innerText = "Interview";
+    status.classList.add('text-green-600', 'bg-white','border','border-green-600');
+    event.target.classList.add('bg-green-500', 'text-white');
   }
-})
+}
+)
