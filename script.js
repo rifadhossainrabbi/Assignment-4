@@ -17,6 +17,9 @@ jobNumber.innerText = allChildNumber.children.length;
  * 4-design only selected button(add and remove)
  */
 function designOnly(id) {
+  const interviewSection = document.querySelector(".interview_section");
+  // const rejectSection = document.querySelector(".reject_section");
+  const initialCard = document.getElementById("initial_interview_card");
   // button effect after click
   // Get the buttons
   const allButton = document.getElementById("all_btn");
@@ -39,15 +42,67 @@ function designOnly(id) {
   selectButton.classList.remove("bg-white", "text-gray-500");
 
   const allCardSection = document.querySelector(".all_card_section");
-  if (id == 'interview_btn_three') {
-    allCardSection.classList.add('hidden');
-    // Click korar por
-    const interviewSection = document.querySelector(".interview_section");
+
+  /** 
+   * All btn a click korle all_btn_section dekhabe kintu interview_seciton dekahbe na
+   * Interview btn a click korle interview_btn dekhabe kintu all_btn_section dekahbe na
+   */
+  // if (id == 'interview_btn_three') {
+  //   allCardSection.classList.add("hidden");
+  //   const interviewSection = document.querySelector(".interview_section");
+  //   interviewSection.classList.remove("hidden");
+  // } else if (id == 'all_btn') {
+  //   allCardSection.classList.remove("hidden");
+  //   const interviewSection = document.querySelector(".interview_section");
+  //   interviewSection.classList.add("hidden");
+  // }
+  const rejectSection = document.querySelector(".reject_section");
+
+  if (id === 'all_btn') {
+    allCardSection.classList.remove("hidden");
+    interviewSection.classList.add("hidden");
+    rejectSection.classList.add("hidden");
+    initialCard.classList.add("hidden");
+  }
+  else if (id === 'interview_btn_three') {
+    allCardSection.classList.add("hidden");
     interviewSection.classList.remove("hidden");
-    const hideInitialCard = document.getElementById("initial_interview_card");
-    hideInitialCard.classList.add('hidden');
-   }
+    rejectSection.classList.add("hidden");
+
+    // interview list empty kina check
+    if (interviewSection.children.length === 0) {
+      initialCard.classList.remove("hidden");
+    } else {
+      initialCard.classList.add("hidden");
+    }
+  }
+  else if (id === 'reject_btn_three') {
+    const rejectSection = document.querySelector(".reject_section");
+    const interviewSection = document.querySelector(".interview_section");
+
+    allCardSection.classList.add("hidden");
+    interviewSection.classList.add("hidden");
+    rejectSection.classList.remove("hidden");
+
+    if (rejectSection.children.length === 0) {
+      initialCard.classList.remove("hidden");
+    } else {
+      initialCard.classList.add("hidden");
+    }
+  }
+
 }
+
+// click any interview button and hide initial section and add interview section
+// function btnToggling() {
+//   const interviewSection = document.querySelector(".interview_section");
+//   const initialCardSection = document.getElementById("initial_interview_card");
+//   if (interviewSection.children.length === 0) {
+//     initialCardSection.classList.remove('hidden');
+//   } else {
+//     initialCardSection.classList.add('hidden');
+//   }
+// }
 
 
 // Click button and hide other card and show only relative card
@@ -56,18 +111,27 @@ function designOnly(id) {
  * 2- Hide all Card
  * 3- Remove hide form selected Card 
  */
-function showOnly(id2) {
-  const allCardSection = document.getElementById("all_card_sections");
-  const initialCardSection = document.getElementById("initial_interview_card");
+// function showOnly(id2) {
+//   const allCardSection = document.getElementById("all_card_sections");
+//   const initialCardSection = document.getElementById("initial_interview_card");
 
-  //1-All hide
-  allCardSection.classList.add("hidden");
-  initialCardSection.classList.add("hidden");
+//   //1-All hide
+//   allCardSection.classList.add("hidden");
+//   initialCardSection.classList.add("hidden");
+//   // const interviewSection = document.querySelector(".interview_section");
+//   // interviewSection.classList.add("hidden");
 
-  // 2- hide remove selected id2
-  const selectId2 = document.getElementById(id2);
-  selectId2.classList.remove("hidden");
-}
+//   // 2- hide remove selected id2
+//   const selectId2 = document.getElementById(id2);
+//   const interviewSection = document.querySelector(".interview_section");
+//   // const initialCardSection = document.getElementById("initial_interview_card");
+//   if (interviewSection.parent.length === 1) {
+//     initialCardSection.classList.remove('hidden');
+//   } else {
+//     initialCardSection.classList.add('hidden');
+//   }
+//   selectId2.classList.remove("hidden");
+// }
 
 // Click Interview or Rejected button and change status from card
 /**
@@ -80,29 +144,51 @@ let rejectList = [];
 const allCardSection = document.getElementById("all_card_sections");
 allCardSection.addEventListener("click", function (event) {
   // console.log(event.target.parentNode);
+  const parentNode = event.target.parentNode.parentNode;
+  const companyName = parentNode.querySelector('.company_name').innerText;
+  const skillHave = parentNode.querySelector('.skill').innerText;
+  const extraInfo = parentNode.querySelector('.extra_info').innerText;
+  const clickedButton = parentNode.querySelector('.clicked').innerText;
+  const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
+
+
+  // Click korar por 
+  // const hideInitialCard = document.getElementById("initial_interview_card");
+  // hideInitialCard.classList.add('hidden');
+  // const interviewSection = document.querySelector(".interview_section");
+  // interviewSection.classList.add("hidden");
+
+  const cardItems = {
+    companyName,
+    skillHave,
+    extraInfo,
+    clickedButton,
+    paragraphsHave
+  }
+
   if (event.target.classList.contains("interview_btn")) {
-    const parentNode = event.target.parentNode.parentNode;
-    const companyName = parentNode.querySelector('.company_name').innerText;
-    const skillHave = parentNode.querySelector('.skill').innerText;
-    const extraInfo = parentNode.querySelector('.extra_info').innerText;
-    const clickedButton = parentNode.querySelector('.clicked').innerText;
-    const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
-     
+    // const parentNode = event.target.parentNode.parentNode;
+    // const companyName = parentNode.querySelector('.company_name').innerText;
+    // const skillHave = parentNode.querySelector('.skill').innerText;
+    // const extraInfo = parentNode.querySelector('.extra_info').innerText;
+    // const clickedButton = parentNode.querySelector('.clicked').innerText;
+    // const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
 
-    // Click korar por 
-    const hideInitialCard = document.getElementById("initial_interview_card");
-    hideInitialCard.classList.add('hidden');
-    const interviewSection = document.querySelector(".interview_section");
-    interviewSection.classList.add("hidden");
 
-    const cardItems = {
-      companyName,
-      skillHave,
-      extraInfo,
-      clickedButton,
-      paragraphsHave
-    }
-    console.log(cardItems);
+    // // Click korar por 
+    // // const hideInitialCard = document.getElementById("initial_interview_card");
+    // // hideInitialCard.classList.add('hidden');
+    // // const interviewSection = document.querySelector(".interview_section");
+    // // interviewSection.classList.add("hidden");
+
+    // const cardItems = {
+    //   companyName,
+    //   skillHave,
+    //   extraInfo,
+    //   clickedButton,
+    //   paragraphsHave
+    // }
+    // console.log(cardItems);
 
     /** 
      *1- prothome Interview button er design korbo 
@@ -126,6 +212,16 @@ allCardSection.addEventListener("click", function (event) {
       document.getElementById("interview_count").innerText = interviewList.length;
     }
     adding();
+    updateCounts();
+
+    // const interviewSection = document.querySelector(".interview_section");
+    // const initialCardSection = document.getElementById("initial_interview_card");
+
+    // if (interviewSection.children.length === 0) {
+    //   initialCardSection.classList.remove('hidden');
+    // } else {
+    //   initialCardSection.classList.add('hidden');
+    // }
   }
   else if (event.target.classList.contains("reject_btn")) {
     const parentNode = event.target.parentNode.parentNode;
@@ -142,9 +238,24 @@ allCardSection.addEventListener("click", function (event) {
 
     const interviewBtn = parentNode.querySelector(".interview_btn");
     interviewBtn.classList.remove('bg-green-500', 'text-white');
+
+    const companyNameExist = rejectList.find(item => item.companyName == cardItems.companyName);
+    if (!companyNameExist) {
+      rejectList.push(cardItems);
+      // console.log(interviewList);
+      document.getElementById("reject_count").innerText = rejectList.length;
+    }
+    renderReject();
+    updateCounts();
   }
 }
 )
+
+
+function updateCounts() {
+  document.getElementById("interview_count").innerText = interviewList.length;
+  document.getElementById("reject_count").innerText = rejectList.length;
+}
 
 
 function adding() {
@@ -188,5 +299,72 @@ function adding() {
         </div>
     `;
     interviewSection.appendChild(div);
+    // const initialCardSection = document.getElementById("initial_interview_card");
+    // if (interviewSection.children.length === 0) {
+    //   initialCardSection.classList.remove('hidden');
+    // } else {
+    //   initialCardSection.classList.add('hidden'); // hide করবে
+    // }
   }
+}
+
+
+function renderReject() {
+
+  const rejectSection = document.querySelector(".reject_section");
+  const initialCard = document.getElementById("initial_interview_card");
+
+  rejectSection.innerHTML = "";
+
+  for (const reject of rejectList) {
+
+    const div = document.createElement("div");
+
+    div.className =
+      "flex justify-between items-start bg-white mt-4 p-5 rounded-xl shadow";
+
+    div.innerHTML = `
+       <div class="left_side space-y-5">
+          <!-- part-1 -->
+          <div>
+            <h4 id="mobile_first_corp" class="company_name text-xl font-semibold">${reject.companyName}</h4>
+            <p id="react_native" class="skill text-gray-500">${reject.skillHave}</p>
+          </div>
+          <!-- part-2 -->
+          <div>
+            <p class="extra_info text-gray-500">${reject.extraInfo}</p>
+          </div>
+          <!-- part-3 -->
+          <div>
+            <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">${reject.clickedButton}</p>
+            <p  class="paragraphs text-gray-600">${reject.paragraphsHave}</p>
+          </div>
+          <!-- part-4 -->
+          <div class="btn-select flex gap-3">
+            <button
+              class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
+            <button
+              class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
+            <button
+              class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
+          </div>
+        </div>
+        <!-- right side -->
+        <div class="right_side p-3 bg-white border border-[#F1F2F4] rounded-full hover:cursor-pointer hidden lg:block ">
+          <button id="delete" class="hover:cursor-pointer lg:block sm:hidden"><i
+              class="fa-regular fa-trash-can inline-block"></i></button>
+        </div>
+    `;
+
+    rejectSection.appendChild(div);
+  }
+
+
+  // empty kina check
+  // if (rejectSection.children.length === 0) {
+  //   initialCard.classList.remove("hidden");
+  // } else {
+  //   initialCard.classList.add("hidden");
+  // }
+
 }

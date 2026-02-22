@@ -66,7 +66,7 @@
       </div>
 
       <div class="job_count">
-        <p class="font-bold text-2xl"><span  id="job_count">0</span> Jobs</p>
+        <p class="font-bold text-2xl"><span id="job_count">0</span> Jobs</p>
       </div>
 
     </div>
@@ -75,14 +75,15 @@
     <div class="buttons flex gap-3">
 
       <!-- button-1 -->
-      <button onclick="designOnly('all_btn'), showOnly('all_card_sections')" id="all_btn" class="py-2.5 px-8 bg-blue-500 text-white rounded-lg hover:cursor-pointer">All</button>
+      <button onclick="designOnly('all_btn')" id="all_btn"
+        class="py-2.5 px-8 bg-blue-500 text-white rounded-lg hover:cursor-pointer">All</button>
 
       <!-- button-2 -->
-      <button onclick="designOnly('interview_btn_three') , showOnly('initial_interview_card')" id="interview_btn_three"
+      <button onclick="designOnly('interview_btn_three')" id="interview_btn_three"
         class="py-2.5 px-8 bg-white text-gray-500 rounded-lg hover:cursor-pointer">Interview</button>
 
       <!-- button-3 -->
-      <button onclick="designOnly('reject_btn_three') , showOnly('initial_interview_card')" id="reject_btn_three"
+      <button onclick="designOnly('reject_btn_three')" id="reject_btn_three"
         class="py-2.5 px-8 bg-white text-gray-500 rounded-lg hover:cursor-pointer">Rejected</button>
 
     </div>
@@ -98,9 +99,14 @@
     </div>
 
     <!-- Interview Card Section -->
-     <div class="interview_section hidden">
+    <div class="interview_section hidden">
 
-     </div>
+    </div>
+
+    <!-- Reject CArd section -->
+    <div class="reject_section hidden">
+
+    </div>
 
     <!-- All card Section -->
     <section id="all_card_sections" class="all_card_section">
@@ -130,11 +136,11 @@
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button 
+            <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -173,9 +179,9 @@
           <div class="btn-select flex gap-3">
             <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -214,9 +220,9 @@
           <div class="btn-select flex gap-3">
             <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -247,17 +253,17 @@
           <!-- part-3 -->
           <div>
             <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">Not Applied</p>
-            <p  class="paragraphs text-gray-600">Design and maintain scalable backend systems using Python and AWS.
+            <p class="paragraphs text-gray-600">Design and maintain scalable backend systems using Python and AWS.
               Work with modern DevOps practices and cloud
               infrastructure.</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button 
+            <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -279,7 +285,7 @@
           </div>
           <!-- part-2 -->
           <div>
-            <p  class="extra_info text-gray-500">Austin, TX
+            <p class="extra_info text-gray-500">Austin, TX
               •
               Full-time
               •
@@ -288,17 +294,17 @@
           <!-- part-3 -->
           <div>
             <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">Not Applied</p>
-            <p  class="paragraphs text-gray-600">Create beautiful and functional user interfaces for our suite of
+            <p class="paragraphs text-gray-600">Create beautiful and functional user interfaces for our suite of
               products. Strong design skills and frontend development
               expertise required.</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button 
+            <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -335,11 +341,11 @@
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button 
+            <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -370,17 +376,17 @@
           <!-- part-3 -->
           <div>
             <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">Not Applied</p>
-            <p  class="text-gray-600 paragraphs">Join our fast-growing startup and work on our core platform.
+            <p class="text-gray-600 paragraphs">Join our fast-growing startup and work on our core platform.
               Experience with Node.js and React required. Great benefits
               and equity package included.</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button 
+            <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -402,7 +408,7 @@
           </div>
           <!-- part-2 -->
           <div>
-            <p  class="text-gray-500 extra_info">San Francisco, CA
+            <p class="text-gray-500 extra_info">San Francisco, CA
               •
               Full-time
               •
@@ -422,9 +428,9 @@
           <div class="btn-select flex gap-3">
             <button
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
-            <button 
+            <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button 
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
