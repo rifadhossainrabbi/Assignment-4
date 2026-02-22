@@ -37,6 +37,16 @@ function designOnly(id) {
   const selectButton = document.getElementById(id);
   selectButton.classList.add('bg-blue-500', 'text-white');
   selectButton.classList.remove("bg-white", "text-gray-500");
+
+  const allCardSection = document.querySelector(".all_card_section");
+  if (id == 'interview_btn_three') {
+    allCardSection.classList.add('hidden');
+    // Click korar por
+    const interviewSection = document.querySelector(".interview_section");
+    interviewSection.classList.remove("hidden");
+    const hideInitialCard = document.getElementById("initial_interview_card");
+    hideInitialCard.classList.add('hidden');
+   }
 }
 
 
@@ -77,9 +87,13 @@ allCardSection.addEventListener("click", function (event) {
     const extraInfo = parentNode.querySelector('.extra_info').innerText;
     const clickedButton = parentNode.querySelector('.clicked').innerText;
     const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
+     
+
     // Click korar por 
-    // const hideInitialCard = document.getElementById("initial_interview_card");
-    // hideInitialCard.classList.add('hidden');
+    const hideInitialCard = document.getElementById("initial_interview_card");
+    hideInitialCard.classList.add('hidden');
+    const interviewSection = document.querySelector(".interview_section");
+    interviewSection.classList.add("hidden");
 
     const cardItems = {
       companyName,
@@ -137,11 +151,10 @@ function adding() {
   const interviewSection = document.querySelector(".interview_section");
   interviewSection.innerHTML = ``;
 
-  for (const interview of interviewList ) {
+  for (const interview of interviewList) {
     let div = document.createElement('div');
     div.className = `jobs_section  flex justify-between items-start bg-white mt-4 p-5 rounded-xl shadow`;
     div.innerHTML = `
-    <section class="">
         <!-- left side -->
         <div class="left_side space-y-5">
           <!-- part-1 -->
@@ -151,12 +164,12 @@ function adding() {
           </div>
           <!-- part-2 -->
           <div>
-            <p id="remote" class="extra_info text-gray-500">${interview.extraInfo}</p>
+            <p class="extra_info text-gray-500">${interview.extraInfo}</p>
           </div>
           <!-- part-3 -->
           <div>
             <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">${interview.clickedButton}</p>
-            <p id="paragraph" class="paragraphs text-gray-600">${interview.paragraphsHave}</p>
+            <p  class="paragraphs text-gray-600">${interview.paragraphsHave}</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
@@ -164,7 +177,7 @@ function adding() {
               class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
             <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button id="delete_btn_select"
+            <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
         </div>
@@ -173,7 +186,6 @@ function adding() {
           <button id="delete" class="hover:cursor-pointer lg:block sm:hidden"><i
               class="fa-regular fa-trash-can inline-block"></i></button>
         </div>
-      </section>
     `;
     interviewSection.appendChild(div);
   }
