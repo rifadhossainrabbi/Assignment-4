@@ -66,7 +66,7 @@
       </div>
 
       <div class="job_count">
-        <p id="job_count" class="font-bold text-2xl">0 Jobs</p>
+        <p class="font-bold text-2xl"><span  id="job_count">0</span> Jobs</p>
       </div>
 
     </div>
@@ -75,20 +75,20 @@
     <div class="buttons flex gap-3">
 
       <!-- button-1 -->
-      <button id="all_btn" class="py-2.5 px-8 bg-blue-500 text-white rounded-lg hover:cursor-pointer">All</button>
+      <button onclick="designOnly('all_btn'), showOnly('all_card_sections')" id="all_btn" class="py-2.5 px-8 bg-blue-500 text-white rounded-lg hover:cursor-pointer">All</button>
 
       <!-- button-2 -->
-      <button id="interview_btn"
+      <button onclick="designOnly('interview_btn') , showOnly('initial_interview_card')" id="interview_btn"
         class="py-2.5 px-8 bg-white text-gray-500 rounded-lg hover:cursor-pointer">Interview</button>
 
       <!-- button-3 -->
-      <button id="reject_btn"
+      <button onclick="designOnly('reject_btn') , showOnly('initial_interview_card')" id="reject_btn"
         class="py-2.5 px-8 bg-white text-gray-500 rounded-lg hover:cursor-pointer">Rejected</button>
 
     </div>
 
     <!-- Interview initial card -->
-    <div class="initial_interview_card  flex justify-center items-center mx-auto bg-white
+    <div id="initial_interview_card" class="hidden flex justify-center items-center mx-auto bg-white
     text-center my-5 rounded-xl">
       <div class="card_item">
         <img class="mx-auto pt-35 mb-5 w-[100px]" src="./jobs.png" alt="">
@@ -98,7 +98,7 @@
     </div>
 
     <!-- All card Section -->
-    <section class="all_card_section">
+    <section id="all_card_sections" class="all_card_section">
       <!-- Section Job-1 -->
       <section class="all_jobs_section flex justify-between items-start bg-white mt-4 p-5 rounded-xl shadow">
         <!-- left side -->
