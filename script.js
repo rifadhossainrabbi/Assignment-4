@@ -35,7 +35,6 @@ function designOnly(id) {
 
   // design only selected button
   const selectButton = document.getElementById(id);
-
   selectButton.classList.add('bg-blue-500', 'text-white');
   selectButton.classList.remove("bg-white", "text-gray-500");
 }
@@ -88,10 +87,31 @@ allCardSection.addEventListener("click", function (event) {
     }
     console.log(cardItems);
 
+    /** 
+     *1- prothome Interview button er design korbo 
+     *2- abar Reject button er design korbo
+    *3- interview button click hole reject button a jei design korsi ta remove hobe
+   *4- reject button click hole interview button a jei design korsi ta remove hobe
+     */
     const status = parentNode.querySelector(".clicked");
     status.innerText = "Interview";
-    status.classList.add('text-green-600', 'bg-white','border','border-green-600');
+    status.classList.add('text-green-600', 'border', 'border-green-600', 'bg-white');
     event.target.classList.add('bg-green-500', 'text-white');
+
+    status.classList.remove('text-red-600', 'border-red-600');
+    const rejectBtn = parentNode.querySelector(".reject_btn");
+    rejectBtn.classList.remove('bg-red-500', 'text-white');
+  }
+  else if (event.target.classList.contains("reject_btn")) {
+    const parentNode = event.target.parentNode.parentNode;
+    const status = parentNode.querySelector(".clicked");
+    status.innerText = "Rejected";
+    status.classList.add('text-red-600', 'border', 'border-red-600', 'bg-white');
+    event.target.classList.add('bg-red-500', 'text-white');
+    status.classList.remove('text-green-600', 'border-green-600');
+
+    const interviewBtn = parentNode.querySelector(".interview_btn");
+    interviewBtn.classList.remove('bg-green-500', 'text-white');
   }
 }
 )
