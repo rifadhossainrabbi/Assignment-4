@@ -42,20 +42,6 @@ function designOnly(id) {
   selectButton.classList.remove("bg-white", "text-gray-500");
 
   const allCardSection = document.querySelector(".all_card_section");
-
-  /** 
-   * All btn a click korle all_btn_section dekhabe kintu interview_seciton dekahbe na
-   * Interview btn a click korle interview_btn dekhabe kintu all_btn_section dekahbe na
-   */
-  // if (id == 'interview_btn_three') {
-  //   allCardSection.classList.add("hidden");
-  //   const interviewSection = document.querySelector(".interview_section");
-  //   interviewSection.classList.remove("hidden");
-  // } else if (id == 'all_btn') {
-  //   allCardSection.classList.remove("hidden");
-  //   const interviewSection = document.querySelector(".interview_section");
-  //   interviewSection.classList.add("hidden");
-  // }
   const rejectSection = document.querySelector(".reject_section");
 
   if (id === 'all_btn') {
@@ -143,51 +129,29 @@ let rejectList = [];
 
 const allCardSection = document.getElementById("all_card_sections");
 allCardSection.addEventListener("click", function (event) {
-  // console.log(event.target.parentNode);
-  const parentNode = event.target.parentNode.parentNode;
-  const companyName = parentNode.querySelector('.company_name').innerText;
-  const skillHave = parentNode.querySelector('.skill').innerText;
-  const extraInfo = parentNode.querySelector('.extra_info').innerText;
-  const clickedButton = parentNode.querySelector('.clicked').innerText;
-  const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
-
-
-  // Click korar por 
-  // const hideInitialCard = document.getElementById("initial_interview_card");
-  // hideInitialCard.classList.add('hidden');
-  // const interviewSection = document.querySelector(".interview_section");
-  // interviewSection.classList.add("hidden");
-
-  const cardItems = {
-    companyName,
-    skillHave,
-    extraInfo,
-    clickedButton,
-    paragraphsHave
-  }
-
   if (event.target.classList.contains("interview_btn")) {
-    // const parentNode = event.target.parentNode.parentNode;
-    // const companyName = parentNode.querySelector('.company_name').innerText;
-    // const skillHave = parentNode.querySelector('.skill').innerText;
-    // const extraInfo = parentNode.querySelector('.extra_info').innerText;
-    // const clickedButton = parentNode.querySelector('.clicked').innerText;
-    // const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
+    // console.log(event.target.parentNode);
+    const parentNode = event.target.parentNode.parentNode;
+    const companyName = parentNode.querySelector('.company_name').innerText;
+    const skillHave = parentNode.querySelector('.skill').innerText;
+    const extraInfo = parentNode.querySelector('.extra_info').innerText;
+    const clickedButton = parentNode.querySelector('.clicked').innerText;
+    const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
 
 
-    // // Click korar por 
-    // // const hideInitialCard = document.getElementById("initial_interview_card");
-    // // hideInitialCard.classList.add('hidden');
-    // // const interviewSection = document.querySelector(".interview_section");
-    // // interviewSection.classList.add("hidden");
+    // Click korar por 
+    // const hideInitialCard = document.getElementById("initial_interview_card");
+    // hideInitialCard.classList.add('hidden');
+    // const interviewSection = document.querySelector(".interview_section");
+    // interviewSection.classList.add("hidden");
 
-    // const cardItems = {
-    //   companyName,
-    //   skillHave,
-    //   extraInfo,
-    //   clickedButton,
-    //   paragraphsHave
-    // }
+    const cardItems = {
+      companyName,
+      skillHave,
+      extraInfo,
+      clickedButton: "Interview",
+      paragraphsHave
+    }
     // console.log(cardItems);
 
     /** 
@@ -211,7 +175,7 @@ allCardSection.addEventListener("click", function (event) {
       console.log(interviewList);
       document.getElementById("interview_count").innerText = interviewList.length;
     }
-    adding();
+    addingInterview();
     updateCounts();
 
     // const interviewSection = document.querySelector(".interview_section");
@@ -224,7 +188,31 @@ allCardSection.addEventListener("click", function (event) {
     // }
   }
   else if (event.target.classList.contains("reject_btn")) {
+    // console.log(event.target.parentNode);
     const parentNode = event.target.parentNode.parentNode;
+    const companyName = parentNode.querySelector('.company_name').innerText;
+    const skillHave = parentNode.querySelector('.skill').innerText;
+    const extraInfo = parentNode.querySelector('.extra_info').innerText;
+    const clickedButton = parentNode.querySelector('.clicked').innerText;
+    const paragraphsHave = parentNode.querySelector('.paragraphs').innerText;
+
+
+    // Click korar por 
+    // const hideInitialCard = document.getElementById("initial_interview_card");
+    // hideInitialCard.classList.add('hidden');
+    // const interviewSection = document.querySelector(".interview_section");
+    // interviewSection.classList.add("hidden");
+
+    const cardItems = {
+      companyName,
+      skillHave,
+      extraInfo,
+      clickedButton: "Rejected",
+      paragraphsHave
+    }
+
+
+    // const parentNode = event.target.parentNode.parentNode;
     const status = parentNode.querySelector(".clicked");
     status.innerText = "Rejected";
 
@@ -258,7 +246,7 @@ function updateCounts() {
 }
 
 
-function adding() {
+function addingInterview() {
   const interviewSection = document.querySelector(".interview_section");
   interviewSection.innerHTML = ``;
 
@@ -279,13 +267,13 @@ function adding() {
           </div>
           <!-- part-3 -->
           <div>
-            <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">${interview.clickedButton}</p>
+            <p class="clicked bg-white text-green-500 border border-green-500 inline-block py-2 px-3 rounded-lg mb-2">${interview.clickedButton}</p>
             <p  class="paragraphs text-gray-600">${interview.paragraphsHave}</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
             <button
-              class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
+              class="interview_btn border bg-green-500 text-white border-green-500 py-2 px-3 rounded-md  hover:cursor-pointer">Interview</button>
             <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
             <button
@@ -336,15 +324,15 @@ function renderReject() {
           </div>
           <!-- part-3 -->
           <div>
-            <p class="clicked bg-[#EEF4FF] inline-block py-2 px-3 rounded-lg mb-2">${reject.clickedButton}</p>
+            <p class="clicked bg-[#ffffff] text-red-500 border border-red-500 inline-block py-2 px-3 rounded-lg mb-2">${reject.clickedButton}</p>
             <p  class="paragraphs text-gray-600">${reject.paragraphsHave}</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
             <button
-              class="interview_btn border border-green-500 py-2 px-3 rounded-md text-green-500 hover:cursor-pointer">Interview</button>
+              class="interview_btn border border-green-500 text-green-500 py-2 px-3 rounded-md hover:cursor-pointer">Interview</button>
             <button
-              class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
+              class="reject_btn border border-red-500 bg-red-500 text-white py-2 px-3 rounded-md hover:cursor-pointer">Rejected</button>
             <button
               class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
           </div>
