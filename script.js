@@ -175,17 +175,17 @@ allCardSection.addEventListener("click", function (event) {
       console.log(interviewList);
       document.getElementById("interview_count").innerText = interviewList.length;
     }
+
+    /**
+    * 1- Interview o reject dui section e call korbo 
+    * 2- Interview a jei companyName wala section thakbe ta jodi reject section o jay 
+    * tobe filter er maddhome ta remove kore dibo
+    */
     addingInterview();
+    renderReject();
+    // Jodi age thekei ei companyName wala section reject section a thake tobe ta remove kore dibe
+    rejectList = rejectList.filter(item => item.companyName !== companyName);
     updateCounts();
-
-    // const interviewSection = document.querySelector(".interview_section");
-    // const initialCardSection = document.getElementById("initial_interview_card");
-
-    // if (interviewSection.children.length === 0) {
-    //   initialCardSection.classList.remove('hidden');
-    // } else {
-    //   initialCardSection.classList.add('hidden');
-    // }
   }
   else if (event.target.classList.contains("reject_btn")) {
     // console.log(event.target.parentNode);
@@ -233,8 +233,16 @@ allCardSection.addEventListener("click", function (event) {
       // console.log(interviewList);
       document.getElementById("reject_count").innerText = rejectList.length;
     }
+
+    /**
+   * 1- Interview o reject dui section e call korbo 
+   * 2- Reject a jei companyName wala section thakbe ta jodi Interview section o jay 
+   * tobe filter er maddhome ta remove kore dibo
+   */
+    interviewList = interviewList.filter(item => item.companyName !== companyName);
     renderReject();
     updateCounts();
+    addingInterview();
   }
 }
 )
