@@ -1,4 +1,3 @@
-// console.log("Clicked");
 let currentStatus = 'all';
 
 // Total Card Number Count
@@ -10,20 +9,11 @@ totalCardNumber.innerText = allChildNumber.children.length;
 let jobNumber = document.getElementById("job_count");
 jobNumber.innerText = allChildNumber.children.length;
 
-// Click any button and design 
-/**
- * 1-Get all Items
- * 2-bg white adding all button
- * 3-remove all bg blue
- * 4-design only selected button(add and remove)
- */
 function designOnly(id) {
   currentStatus = id;
   const interviewSection = document.querySelector(".interview_section");
-  // const rejectSection = document.querySelector(".reject_section");
   const initialCard = document.getElementById("initial_interview_card");
-  // button effect after click
-  // Get the buttons
+
   const allButton = document.getElementById("all_btn");
   const interviewButton = document.getElementById("interview_btn_three");
   const rejectButton = document.getElementById("reject_btn_three");
@@ -46,6 +36,7 @@ function designOnly(id) {
   const allCardSection = document.querySelector(".all_card_section");
   const rejectSection = document.querySelector(".reject_section");
 
+  // Clicking hide and show event
   if (id === 'all_btn') {
     allCardSection.classList.remove("hidden");
     interviewSection.classList.add("hidden");
@@ -59,13 +50,6 @@ function designOnly(id) {
 
     toggleEmptyCard();
     addingInterview();
-
-    // interview list empty kina check
-    // if (interviewSection.children.length === 0) {
-    //   initialCard.classList.remove("hidden");
-    // } else {
-    //   initialCard.classList.add("hidden");
-    // }
   }
   else if (id === 'reject_btn_three') {
     const rejectSection = document.querySelector(".reject_section");
@@ -76,14 +60,7 @@ function designOnly(id) {
     rejectSection.classList.remove("hidden");
     toggleEmptyCard();
     renderReject();
-
-    // if (rejectSection.children.length === 0) {
-    //   initialCard.classList.remove("hidden");
-    // } else {
-    //   initialCard.classList.add("hidden");
-    // }
   }
-
 }
 
 // Creat a function for initial hide and show
@@ -100,29 +77,15 @@ function toggleEmptyCard() {
   }
 }
 
-
-// Click button and hide other card and show only relative card
-/**
- * 1- Get all Card
- * 2- Hide all Card
- * 3- Remove hide form selected Card 
- */
-// function showOnly(id2) {
-//   const allCardSection = document.getElementById("all_card_sections");
-//   const initialCardSection = document.getElementById("initial_interview_card");
-
-// Click Interview or Rejected button and change status from card
-/**
- * Get All Card Sections 
- */
-
+// 2 empty arry for accesssing card element to creat new card
 let interviewList = [];
 let rejectList = [];
 
+// Interview and Reject click event function
 document.addEventListener("click", function (event) {
   if (event.target.classList.contains("interview_btn")) {
-    // console.log(event.target.parentNode);
     const parentNode = event.target.parentNode.parentNode;
+    // Accessing all card element
     const companyName = parentNode.querySelector('.company_name').innerText;
     const skillHave = parentNode.querySelector('.skill').innerText;
     const extraInfo = parentNode.querySelector('.extra_info').innerText;
@@ -136,12 +99,7 @@ document.addEventListener("click", function (event) {
       clickedButton: "Interview",
       paragraphsHave
     }
-    // console.log(cardItems);
 
-    /** 
-     *1- prothome Interview button er design korbo 
-     *2- interview button click hole reject button a jei design korsi ta remove korbo
-     */
     const status = parentNode.querySelector(".clicked");
     status.innerText = "Interview";
     status.classList.add('text-green-600', 'border', 'border-green-600', 'bg-white');
@@ -151,23 +109,13 @@ document.addEventListener("click", function (event) {
     const rejectBtn = parentNode.querySelector(".reject_btn");
     rejectBtn.classList.remove('bg-red-500', 'text-white');
 
-    // Ekhon duplicate bade info gulo empty Array te push korbo
-    // const companyNameExist = interviewList.find(item => item.companyName == cardItems.companyName);
     const companyNameExist = interviewList.find(item => item.companyName == cardItems.companyName);
     if (!companyNameExist) {
       interviewList.push(cardItems);
       console.log(interviewList);
-      // document.getElementById("interview_count").innerText = interviewList.length;
     }
 
-    /**
-    * 1- Interview o reject dui section e call korbo 
-    * 2- Interview a jei companyName wala section thakbe ta jodi reject section o jay 
-    * tobe filter er maddhome ta remove kore dibo
-    */
-    // addingInterview();
-    // renderReject();
-    // Jodi age thekei ei companyName wala section reject section a thake tobe ta remove kore dibe
+    // Reject list a jodi same companyName wala card thake ta remove hobe
     rejectList = rejectList.filter(item => item.companyName !== companyName);
     updateCounts();
     toggleEmptyCard();
@@ -193,15 +141,9 @@ document.addEventListener("click", function (event) {
       paragraphsHave
     }
 
-
-    // const parentNode = event.target.parentNode.parentNode;
     const status = parentNode.querySelector(".clicked");
     status.innerText = "Rejected";
 
-    /**
-     *1- abar Reject button er design korbo
-     *2- reject button click hole interview button a jei design korsi ta remove korbo
-     */
     status.classList.add('text-red-600', 'border', 'border-red-600', 'bg-white');
     event.target.classList.add('bg-red-500', 'text-white');
     status.classList.remove('text-green-600', 'border-green-600');
@@ -212,14 +154,9 @@ document.addEventListener("click", function (event) {
     const companyNameExist = rejectList.find(item => item.companyName == cardItems.companyName);
     if (!companyNameExist) {
       rejectList.push(cardItems);
-      // document.getElementById("reject_count").innerText = rejectList.length;
     }
 
-    /**
-   * 1- Interview o reject dui section e call korbo 
-   * 2- Reject a jei companyName wala section thakbe ta jodi reject section o jay 
-   * tobe filter er maddhome ta remove kore dibo
-   */
+    // Inteview list a jodi same companyName wala card thake ta remove hobe
     interviewList = interviewList.filter(item => item.companyName !== companyName);
     updateCounts();
     toggleEmptyCard();
@@ -230,13 +167,14 @@ document.addEventListener("click", function (event) {
 }
 )
 
-
+// For count Interview and Reject card number
 function updateCounts() {
   document.getElementById("interview_count").innerText = interviewList.length;
   document.getElementById("reject_count").innerText = rejectList.length;
 }
 
 
+// Card emplement function for Interview
 function addingInterview() {
   const interviewSection = document.querySelector(".interview_section");
   interviewSection.innerHTML = ``;
@@ -278,16 +216,10 @@ function addingInterview() {
         </div>
     `;
     interviewSection.appendChild(div);
-    // const initialCardSection = document.getElementById("initial_interview_card");
-    // if (interviewSection.children.length === 0) {
-    //   initialCardSection.classList.remove('hidden');
-    // } else {
-    //   initialCardSection.classList.add('hidden'); // hide করবে
-    // }
   }
 }
 
-
+// Card emplement function for Rejected 
 function renderReject() {
 
   const rejectSection = document.querySelector(".reject_section");
@@ -337,13 +269,4 @@ function renderReject() {
 
     rejectSection.appendChild(div);
   }
-
-
-  // empty kina check
-  // if (rejectSection.children.length === 0) {
-  //   initialCard.classList.remove("hidden");
-  // } else {
-  //   initialCard.classList.add("hidden");
-  // }
-
 }
