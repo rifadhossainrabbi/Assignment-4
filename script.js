@@ -229,20 +229,12 @@ document.addEventListener("click", function (event) {
     document.querySelector(".reject_section")
   ];
 
-  // সব section থেকে matching card খুঁজে remove করা
+  //match kora card remove
   for (let s = 0; s < sections.length; s++) {
     const section = sections[s];
     // jodi section ti DOM a na thake to porer section ta check korbe r thakle nicher code er dike jabe
     if (!section) continue;
 
-    // const cards = section.querySelectorAll(".all_jobs_section");
-    // for (let i = cards.length - 1; i >= 0; i--) {
-    //   const cardCompany = cards[i].querySelector(".company_name").innerText;
-    //   // main logic cardCompany er sathe companyName mile gele oi card delete hobe
-    //   if (cardCompany === companyName) {
-    //     cards[i].remove();
-    //   }
-    // }
     const cards = section.getElementsByClassName("all_jobs_section"); // live HTMLCollection
     for (const card of cards) {
       if (card.querySelector(".company_name").innerText === companyName) {
@@ -293,12 +285,10 @@ function updateCounts() {
   }
   else if (currentStatus === 'interview_btn_three') {
     // Interview section count
-    // jobNumber.innerText =interviewSection.children.length;
     jobNumber.innerText = interviewList.length + " of 8";
   }
   else if (currentStatus === 'reject_btn_three') {
     // Reject section count
-    // jobNumber.innerText =rejectSection.children.length;
     jobNumber.innerText = rejectList.length + " of 8";
   }
 }
@@ -359,10 +349,7 @@ function addingInterview() {
 
 // Card emplement function for Rejected 
 function renderReject() {
-
   const rejectSection = document.querySelector(".reject_section");
-  const initialCard = document.getElementById("initial_interview_card");
-
   rejectSection.innerHTML = "";
 
   for (const reject of rejectList) {
