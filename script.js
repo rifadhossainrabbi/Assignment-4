@@ -119,6 +119,7 @@ document.addEventListener("click", function (event) {
     rejectList = rejectList.filter(item => item.companyName !== companyName);
     updateCounts();
     toggleEmptyCard();
+    updateSingleCardDesign(companyName);
     if (currentStatus == 'reject_btn_three') {
       renderReject();
     }
@@ -160,12 +161,68 @@ document.addEventListener("click", function (event) {
     interviewList = interviewList.filter(item => item.companyName !== companyName);
     updateCounts();
     toggleEmptyCard();
+    updateSingleCardDesign(companyName);
     if (currentStatus == 'interview_btn_three') {
       addingInterview();
     }
   }
 }
 )
+
+// Design toggling
+function updateSingleCardDesign(companyName) {
+
+  // 1- sob cardgulo k ekta variable a nibo
+  const allCards = document.querySelectorAll(".all_jobs_section");
+
+  // 2- card gulo k ekta ekta kore loop calabo
+  for (let card of allCards) {
+
+    // Card gulor vitore company name gulo eta name variable a rakhbo
+    const name = card.querySelector(".company_name").innerText;
+
+    // ekhon name jei company name er sathe milbe seita te code emplement hobe
+    if (name === companyName) {
+
+      // jehetu clickedButton,interviewBtn o rejectBtn er design change hobe tader k variable a rakhbo
+      const clickedButton = card.querySelector(".clicked");
+      const interviewBtn = card.querySelector(".interview_btn");
+      const rejectBtn = card.querySelector(".reject_btn");
+
+      // interview btn k loop kore seitar companyName er sathe jodi companyName mile tobe sei onujai btn 3tar design change hobe
+      for (let item of interviewList) {
+        if (item.companyName === companyName) {
+
+          clickedButton.innerText = "Interview";
+          clickedButton.className =
+            "clicked bg-white text-green-600 border border-green-600 inline-block py-2 px-3 rounded-lg mb-2";
+
+          interviewBtn.classList.add("bg-green-500", "text-white");
+          rejectBtn.classList.remove("bg-red-500", "text-white");
+
+          // mile gele design change korei return korbe mane r code colbe na
+          return;
+        }
+      }
+
+      // reject btn k loop kore seitar companyName er sathe jodi companyName mile tobe sei onujai btn 3tar design change hobe
+      for (let item of rejectList) {
+        if (item.companyName === companyName) {
+
+          clickedButton.innerText = "Rejected";
+          clickedButton.className =
+            "clicked bg-white text-red-600 border border-red-600 inline-block py-2 px-3 rounded-lg mb-2";
+
+          rejectBtn.classList.add("bg-red-500", "text-white");
+          interviewBtn.classList.remove("bg-green-500", "text-white");
+
+          return;
+        }
+      }
+      return;
+    }
+  }
+}
 
 // For count Interview and Reject card number
 function updateCounts() {
