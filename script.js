@@ -294,12 +294,12 @@ function updateCounts() {
   else if (currentStatus === 'interview_btn_three') {
     // Interview section count
     // jobNumber.innerText =interviewSection.children.length;
-    jobNumber.innerText = interviewList.length;
+    jobNumber.innerText = interviewList.length + " of 8";
   }
   else if (currentStatus === 'reject_btn_three') {
     // Reject section count
     // jobNumber.innerText =rejectSection.children.length;
-    jobNumber.innerText = rejectList.length;
+    jobNumber.innerText = rejectList.length + " of 8";
   }
 }
 
