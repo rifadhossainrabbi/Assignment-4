@@ -1,4 +1,191 @@
 <-----------------------------Question:1----------------------------->
+1. What is the difference between getElementById, getElementsByClassName, and querySelector / querySelectorAll? er Answer
+
+getElementById, getElementsByClassName, এবং querySelector / querySelectorAll এর মধ্যে পার্থক্য
+
+i: getElementById দিয়ে আমরা HTML ডকুমেন্ট থেকে যেকোনো id এর নাম দিয়ে JavaScript এর মাধ্যমে তা access করতে পারি।
+
+যেহেতু id ইউনিক হতে হয়, তাই getElementById দিয়ে শুধু একটি element access করা যায়।
+
+ii: getElementsByClassName দিয়ে আমরা HTML ডকুমেন্ট থেকে একই class থাকা একাধিক element access করতে পারি।
+
+iii: querySelector দিয়ে আমরা id, class, tag যেকোনো element access করতে পারি।
+
+Class এর জন্য আগের দিকে একটি dot (.) দিতে হয়, এবং
+
+Id এর জন্য আগের দিকে একটি hash (#) দিতে হয়।
+
+লক্ষ্য করুন: querySelector শুধু প্রথম matching element কে select করে।
+
+iv: querySelectorAll দিয়েও আমরা id, class, tag যেকোনো element access করতে পারি।
+
+Class এর জন্য আগের দিকে dot (.), Id এর জন্য hash (#) দিতে হয়।
+
+তবে querySelectorAll দিয়ে আমরা সব matching element select করতে পারি।
+
+Note:
+
+querySelectorAll
+
+NodeList return করে
+
+DOM পরিবর্তন হলেও এটি auto update হয় না
+
+getElementsByClassName
+
+HTMLCollection return করে
+
+DOM পরিবর্তন হলে এটি auto update হয়
+
+
+
+<-----------------------------Question:2---------------------------->
+
+2. How do you create and insert a new element into the DOM?
+
+DOM-এ নতুন element কিভাবে তৈরি ও insert করবেন
+
+i: প্রথমে HTML-এ একটি ফাঁকা container বানাতে হবে, যার মধ্যে নতুন তৈরি করা elementটি add করা হবে।
+
+Note: এটা না করেও যেই parent element-এ add করতে চাই, সেটাকেই parent ধরেও কাজ করা যায়।
+
+ii: HTML-এ যে ফাঁকা elementটি নিয়েছি, তাকে একটি variable-এ access করব।
+
+iii: document.createElement() এর মধ্যে আমরা ইচ্ছা মতো tag নাম দিতে পারি এবং এটি একটি variable-এ assign করব।
+
+iv: iii-তে বানানো variable-এ variable.innerHTML ব্যবহার করে আমরা ইচ্ছা মতো content দিতে পারি।
+
+v: ii-তে বানানো parent variable-এ iv-তে বানানো নতুন variable-টি appendChild(newVariable) করে add করব।
+
+এভাবে নতুন element তৈরি ও DOM-এ insert করা হয়।
+
+
+<-----------------------------Question:3----------------------------->
+
+3. What is Event Bubbling? And how does it work?
+
+Event Bubbling কী এবং এটি কিভাবে কাজ করে?
+
+Event Bubbling:
+Event bubbling-এর মাধ্যমে আমরা কোনো element-এর parent, তার parent, তার parent এভাবে উপরের দিকে (grandparent → parent → document) event প্রেরণ করতে পারি।
+মানে, event প্রথম child element থেকে শুরু হয়ে উপরের দিকে parent-এ এবং তার পর grandparent-এ, শেষ পর্যন্ত document পর্যন্ত পৌঁছে।
+
+কেন দরকার:
+
+এর মাধ্যমে সহজেই নির্দিষ্ট element-এ event add করা যায়, না হলে আমাদের অনেকগুলো event add করতে হতো।
+
+একটিমাত্র parent element দিয়ে multiple child element-এর events handle করা যায়।
+
+কিভাবে কাজ করে:
+
+ধরো আমাদের HTML এ আছে:
+
+<!-- <div id="parent">
+  <button class="btn">Button 1</button>
+  <button class="btn">Button 2</button>
+  <button class="btn">Button 3</button>
+</div> -->
+
+আমরা চাই একটি parent-এর eventListener দিয়ে সব button handle করতে:
+
+<!-- document.getElementById("parent").addEventListener("click", function(event){
+  if(event.target.classList.contains("btn")){
+    console.log(event.target.innerText + " clicked");
+  }
+}); -->
+
+কী হচ্ছে এখানে:
+
+document.getElementById("parent") দিয়ে প্রথমে main div বা parent access করা হলো।
+
+addEventListener("click", function(){}) দিয়ে বলা হলো, parent-এর যেকোনো জায়গায় click হলে function execute হবে।
+
+if(event.target.classList.contains("btn")) না দিলে parent-এর যেকোনো জায়গায় click করলে eventListener চলে। এই শর্ত দিয়ে আমরা নির্দিষ্ট child element select করেছি।
+
+console.log(event.target.innerText + " clicked") দিয়ে সেই button-এর text console-এ দেখানো হলো।
+
+Final output: button 1, 2, 3-এর যেকোনো একটিতে click করলে console-এ "Button X clicked" দেখাবে।
+
+
+<-----------------------------Question:4----------------------------->
+
+4. What is Event Delegation in JavaScript? Why is it useful?
+
+Event Delegation কী এবং এটি কেন দরকার?
+
+Event Delegation:
+Event Delegation দিয়ে আমরা একাধিক child element-এ আলাদা আলাদা করে eventListener add না করে, তাদের parent element-এ একটি মাত্র eventListener দিয়ে সব child element handle করতে পারি।
+
+কেন দরকার:
+ধরো আমার HTML-এ একটি div container আছে, যার মধ্যে অনেকগুলো button আছে। যদি Event Delegation না ব্যবহার করি, তাহলে প্রতিটি button-এর জন্য আলাদা আলাদা eventListener add করতে হবে।
+যেমন ধরো, ২০টি button আছে, তাহলে ২০টি eventListener লাগবে।
+
+কিন্তু Event Delegation ব্যবহার করলে parent element-এ একটি eventListener দিয়ে সব child element handle করা সম্ভব।
+এর ভিতরে আমরা event.target.classList.contains() বা event.target.closest() দিয়ে নির্দিষ্ট child element-এ event ঘটাতে পারি।
+ফলত, একাধিকবার আলাদা আলাদা জায়গায় eventListener add করার প্রয়োজন হয় না।
+
+Example:
+
+<!-- <div id="parent">
+  <button class="btn">Button 1</button>
+  <button class="btn">Button 2</button>
+  <button class="btn">Button 3</button>
+</div> -->
+
+<!-- document.getElementById("parent").addEventListener("click", function(event){
+  if(event.target.classList.contains("btn")){
+    console.log(event.target.innerText + " clicked");
+  }
+}); -->
+
+এখানে কী হচ্ছে:
+
+Parent div-এ একটি eventListener add করা হয়েছে।
+
+Parent-এর ভিতরে যেকোনো button-এ click হলে eventListener কাজ করবে।
+
+event.target.classList.contains("btn") দিয়ে নিশ্চিত করা হচ্ছে যে শুধুমাত্র button-এ click হলে কাজ হবে, parent-এর অন্য জায়গায় নয়।
+
+ফলাফল:
+Parent div-এর ভিতরে যেকোনো button-এ click করলে console-এ button-এর নাম এবং "clicked" দেখাবে।
+
+এটাই হলো Event Delegation।
+
+
+<-----------------------------Question:5----------------------------->
+
+preventDefault() এবং stopPropagation() methods
+
+preventDefault() →
+কি: preventDefault() method ব্যবহার করে আমরা element-এর default behavior আটকাতে পারি।
+
+কখন দরকার: মানে এই button/element গুলো তাদের default behavior করতে পারবে না। আমরা eventListener-এ যা বলবো তাই হবে। অনেক সময় বিভিন্ন link, submit button, checkbox ইত্যাদিতে event আটকাতে হয়।
+
+stopPropagation() →
+কি: Event bubbling আটকানো যায়। মানে event parent বা উপরের দিকে ছড়াবে না।
+
+কখন দরকার: সাধারণত event delegation-এর সময় child এবং parent দু’টিতেই listener থাকে। তখন আমরা event.stopPropagation() দিয়ে parent-এ event পৌঁছানো বন্ধ করতে পারি।
+
+উদাহরণ:
+
+<!-- <div id="parent" style="padding:20px; background:lightblue;">
+    Parent Div
+    <button id="child">Click Me</button>
+</div> -->
+
+<!-- document.getElementById("parent").addEventListener("click", function(){
+    console.log("Parent clicked!");
+}); -->
+
+<!-- document.getElementById("child").addEventListener("click", function(event){
+    console.log("Child clicked!");
+    event.stopPropagation(); 
+}); -->
+
+এখানে parent-এ event যাবে না।
+
+
+<-----------------------------Question:1----------------------------->
 
 1. What is the difference between getElementById, getElementsByClassName, and querySelector / querySelectorAll? er Answer
 
