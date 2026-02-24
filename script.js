@@ -9,6 +9,7 @@ totalCardNumber.innerText = allChildNumber.children.length;
 let jobNumber = document.getElementById("job_count");
 jobNumber.innerText = allChildNumber.children.length;
 
+
 function designOnly(id) {
   currentStatus = id;
   const interviewSection = document.querySelector(".interview_section");
@@ -42,12 +43,14 @@ function designOnly(id) {
     interviewSection.classList.add("hidden");
     rejectSection.classList.add("hidden");
     initialCard.classList.add("hidden");
+    updateCounts();
   }
   else if (id === 'interview_btn_three') {
     allCardSection.classList.add("hidden");
     interviewSection.classList.remove("hidden");
     rejectSection.classList.add("hidden");
 
+    updateCounts();
     toggleEmptyCard();
     addingInterview();
   }
@@ -58,6 +61,7 @@ function designOnly(id) {
     allCardSection.classList.add("hidden");
     interviewSection.classList.add("hidden");
     rejectSection.classList.remove("hidden");
+    updateCounts();
     toggleEmptyCard();
     renderReject();
   }
@@ -278,6 +282,25 @@ document.addEventListener("click", function (event) {
 function updateCounts() {
   document.getElementById("interview_count").innerText = interviewList.length;
   document.getElementById("reject_count").innerText = rejectList.length;
+  const allSection = document.querySelector(".all_card_section");
+  const interviewSection = document.querySelector(".interview_section");
+  const rejectSection = document.querySelector(".reject_section");
+  const jobNumber = document.getElementById("job_count");
+
+  if (currentStatus === 'all_btn') {
+    // All jobs count
+    jobNumber.innerText = allSection.children.length;
+  }
+  else if (currentStatus === 'interview_btn_three') {
+    // Interview section count
+    // jobNumber.innerText =interviewSection.children.length;
+    jobNumber.innerText = interviewList.length;
+  }
+  else if (currentStatus === 'reject_btn_three') {
+    // Reject section count
+    // jobNumber.innerText =rejectSection.children.length;
+    jobNumber.innerText = rejectList.length;
+  }
 }
 
 
