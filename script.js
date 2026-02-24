@@ -208,6 +208,72 @@ function updateSingleCardDesign(companyName) {
   }
 }
 
+// Delet btn handle
+document.addEventListener("click", function (event) {
+  // delete btn access
+  const deleteBtn = event.target.closest(".delete_btn");
+  if (!deleteBtn) return;
+
+  // delete btn er parent theke companyName access
+  const companyName = deleteBtn.closest(".all_jobs_section")
+    .querySelector(".company_name").innerText;
+
+  // jei gulote oi card ti thakte pare ta sections er moddhe array hishabe add kora holo
+  const sections = [
+    document.querySelector(".all_card_section"),
+    document.querySelector(".interview_section"),
+    document.querySelector(".reject_section")
+  ];
+
+  // সব section থেকে matching card খুঁজে remove করা
+  for (let s = 0; s < sections.length; s++) {
+    const section = sections[s];
+    // jodi section ti DOM a na thake to porer section ta check korbe r thakle nicher code er dike jabe
+    if (!section) continue;
+
+    // const cards = section.querySelectorAll(".all_jobs_section");
+    // for (let i = cards.length - 1; i >= 0; i--) {
+    //   const cardCompany = cards[i].querySelector(".company_name").innerText;
+    //   // main logic cardCompany er sathe companyName mile gele oi card delete hobe
+    //   if (cardCompany === companyName) {
+    //     cards[i].remove();
+    //   }
+    // }
+    const cards = section.getElementsByClassName("all_jobs_section"); // live HTMLCollection
+    for (const card of cards) {
+      if (card.querySelector(".company_name").innerText === companyName) {
+        card.remove();
+      }
+    }
+  }
+
+  // List update
+
+  // jehetu remove card korar por o array te history theke jay  tai count vul hote pare . Ei jonno InterviewList notun kore update korte hoy
+  let newInterviewList = [];
+  for (let i = 0; i < interviewList.length; i++) {
+    if (interviewList[i].companyName !== companyName) {
+      newInterviewList.push(interviewList[i]);
+    }
+  }
+  interviewList = newInterviewList;
+
+  let newRejectList = [];
+  for (let i = 0; i < rejectList.length; i++) {
+    if (rejectList[i].companyName !== companyName) {
+      newRejectList.push(rejectList[i]);
+    }
+  }
+  rejectList = newRejectList;
+
+  // Count update
+  const allSection = document.querySelector(".all_card_section");
+  document.getElementById("total_count").innerText = allSection.children.length;
+  document.getElementById("job_count").innerText = allSection.children.length;
+  updateCounts();
+  toggleEmptyCard();
+});
+
 // For count Interview and Reject card number
 function updateCounts() {
   document.getElementById("interview_count").innerText = interviewList.length;
@@ -255,7 +321,7 @@ function addingInterview() {
 
         <!-- right side -->
         <div class="right_side mt-4 lg:mt-0">
-          <button class="flex justify-center items-center gap-2
+          <button class="delete_btn hover:cursor-pointer flex justify-center items-center gap-2
                  border border-red-500 py-2 px-3 rounded-md text-red-500
                  lg:border lg:border-gray-200 lg:bg-white lg:text-black lg:px-4 lg:py-2 lg:rounded-full
                   md:border md:border-gray-200 md:bg-white md:text-black md:px-4 md:py-2 md:rounded-full">
@@ -313,7 +379,7 @@ function renderReject() {
 
         <!-- right side -->
         <div class="right_side mt-4 lg:mt-0">
-          <button class="flex justify-center items-center gap-2
+          <button class="delete_btn hover:cursor-pointer flex justify-center items-center gap-2
                  border border-red-500 py-2 px-3 rounded-md text-red-500
                  lg:border lg:border-gray-200 lg:bg-white lg:text-black lg:px-4 lg:py-2 lg:rounded-full
                   md:border md:border-gray-200 md:bg-white md:text-black md:px-4 md:py-2 md:rounded-full">
