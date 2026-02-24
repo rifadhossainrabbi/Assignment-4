@@ -100,14 +100,14 @@ document.addEventListener("click", function (event) {
       paragraphsHave
     }
 
-    const status = parentNode.querySelector(".clicked");
-    status.innerText = "Interview";
-    status.classList.add('text-green-600', 'border', 'border-green-600', 'bg-white');
-    event.target.classList.add('bg-green-500', 'text-white');
+    // const status = parentNode.querySelector(".clicked");
+    // status.innerText = "Interview";
+    // status.classList.add('text-green-600', 'border', 'border-green-600', 'bg-white');
+    // event.target.classList.add('bg-green-500', 'text-white');
 
-    status.classList.remove('text-red-600', 'border-red-600');
-    const rejectBtn = parentNode.querySelector(".reject_btn");
-    rejectBtn.classList.remove('bg-red-500', 'text-white');
+    // status.classList.remove('text-red-600', 'border-red-600');
+    // const rejectBtn = parentNode.querySelector(".reject_btn");
+    // rejectBtn.classList.remove('bg-red-500', 'text-white');
 
     const companyNameExist = interviewList.find(item => item.companyName == cardItems.companyName);
     if (!companyNameExist) {
@@ -142,15 +142,15 @@ document.addEventListener("click", function (event) {
       paragraphsHave
     }
 
-    const status = parentNode.querySelector(".clicked");
-    status.innerText = "Rejected";
+    // const status = parentNode.querySelector(".clicked");
+    // status.innerText = "Rejected";
 
-    status.classList.add('text-red-600', 'border', 'border-red-600', 'bg-white');
-    event.target.classList.add('bg-red-500', 'text-white');
-    status.classList.remove('text-green-600', 'border-green-600');
+    // status.classList.add('text-red-600', 'border', 'border-red-600', 'bg-white');
+    // event.target.classList.add('bg-red-500', 'text-white');
+    // status.classList.remove('text-green-600', 'border-green-600');
 
-    const interviewBtn = parentNode.querySelector(".interview_btn");
-    interviewBtn.classList.remove('bg-green-500', 'text-white');
+    // const interviewBtn = parentNode.querySelector(".interview_btn");
+    // interviewBtn.classList.remove('bg-green-500', 'text-white');
 
     const companyNameExist = rejectList.find(item => item.companyName == cardItems.companyName);
     if (!companyNameExist) {
@@ -169,7 +169,7 @@ document.addEventListener("click", function (event) {
 }
 )
 
-// Design toggling
+// Design toggling . ei puro function colbe jokhon Inteview ba reject k click kora hobe tokhon 
 function updateSingleCardDesign(companyName) {
 
   // 1- sob cardgulo k ekta variable a nibo
