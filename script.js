@@ -285,11 +285,23 @@ function updateCounts() {
   }
   else if (currentStatus === 'interview_btn_three') {
     // Interview section count
-    jobNumber.innerText = interviewList.length + " of 8";
+    // jobNumber.innerText = interviewList.length + " of 8";
+    if (interviewList.length == 0) {
+      jobNumber.innerText = "0";
+    }
+    else {
+      jobNumber.innerText = interviewList.length + " of 8";
+    }
   }
   else if (currentStatus === 'reject_btn_three') {
     // Reject section count
-    jobNumber.innerText = rejectList.length + " of 8";
+    // jobNumber.innerText = rejectList.length + " of 8";
+    if (rejectList.length == 0) {
+      jobNumber.innerText = "0";
+    }
+    else {
+      jobNumber.innerText = rejectList.length + " of 8";
+    }
   }
 }
 
