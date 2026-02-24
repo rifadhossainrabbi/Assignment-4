@@ -153,59 +153,57 @@ document.addEventListener("click", function (event) {
 // Design toggling . ei puro function colbe jokhon Inteview ba reject k click kora hobe 
 function updateSingleCardDesign(companyName) {
 
-  // 1- sob cardgulo k ekta variable a nibo
-  // const allCards = document.querySelectorAll(".all_jobs_section");
+  // Section list
   const allCards = [
-    ...document.querySelectorAll(".all_card_section .all_jobs_section"),
-    ...document.querySelectorAll(".interview_section .all_jobs_section"),
-    ...document.querySelectorAll(".reject_section .all_jobs_section")
+    ".all_card_section",
+    ".interview_section",
+    ".reject_section"
   ];
+  // console.log(allCards);
 
-  // 2- card gulo k ekta ekta kore loop calabo
+  // Section-wise loop
   for (let card of allCards) {
+    const section = document.querySelector(card);
+    // if (!section) continue;
+    if (!section) {
+      continue;
+    }
 
-    // Card gulor vitore company name gulo eta name variable a rakhbo
-    const name = card.querySelector(".company_name").innerText;
+    // Section-er moddhe sob cards
+    const cards = section.querySelectorAll(".all_jobs_section");
 
-    // ekhon name jei company name er sathe milbe seita te code emplement hobe
-    if (name === companyName) {
+    for (let card of cards) {
+      const name = card.querySelector(".company_name").innerText;
 
-      // jehetu clickedButton,interviewBtn o rejectBtn er design change hobe tader k variable a rakhbo
-      const clickedButton = card.querySelector(".clicked");
-      const interviewBtn = card.querySelector(".interview_btn");
-      const rejectBtn = card.querySelector(".reject_btn");
+      if (name === companyName) {
+        const clickedButton = card.querySelector(".clicked");
+        const interviewBtn = card.querySelector(".interview_btn");
+        const rejectBtn = card.querySelector(".reject_btn");
 
-      // interview btn k loop kore seitar companyName er sathe jodi companyName mile tobe sei onujai btn 3tar design change hobe
-      for (let item of interviewList) {
-        if (item.companyName === companyName) {
-
+        // Interview list check
+        const interviewItem = interviewList.find(item => item.companyName === companyName);
+        if (interviewItem) {
           clickedButton.innerText = "Interview";
           clickedButton.className =
             "clicked bg-white text-green-600 border border-green-600 inline-block py-2 px-3 rounded-lg mb-2";
 
           interviewBtn.classList.add("bg-green-500", "text-white");
           rejectBtn.classList.remove("bg-red-500", "text-white");
-
-          // mile gele design change korei return korbe mane r code colbe na
-          return;
+          continue;
         }
-      }
 
-      // reject btn k loop kore seitar companyName er sathe jodi companyName mile tobe sei onujai btn 3tar design change hobe
-      for (let item of rejectList) {
-        if (item.companyName === companyName) {
-
+        // Reject list check
+        const rejectItem = rejectList.find(item => item.companyName === companyName);
+        if (rejectItem) {
           clickedButton.innerText = "Rejected";
           clickedButton.className =
             "clicked bg-white text-red-600 border border-red-600 inline-block py-2 px-3 rounded-lg mb-2";
 
           rejectBtn.classList.add("bg-red-500", "text-white");
           interviewBtn.classList.remove("bg-green-500", "text-white");
-
-          return;
+          continue;
         }
       }
-      return;
     }
   }
 }
