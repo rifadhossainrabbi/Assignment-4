@@ -154,7 +154,12 @@ document.addEventListener("click", function (event) {
 function updateSingleCardDesign(companyName) {
 
   // 1- sob cardgulo k ekta variable a nibo
-  const allCards = document.querySelectorAll(".all_jobs_section");
+  // const allCards = document.querySelectorAll(".all_jobs_section");
+  const allCards = [
+    ...document.querySelectorAll(".all_card_section .all_jobs_section"),
+    ...document.querySelectorAll(".interview_section .all_jobs_section"),
+    ...document.querySelectorAll(".reject_section .all_jobs_section")
+  ];
 
   // 2- card gulo k ekta ekta kore loop calabo
   for (let card of allCards) {
@@ -219,14 +224,14 @@ function addingInterview() {
 
   for (const interview of interviewList) {
     let div = document.createElement('div');
-    div.className = `jobs_section  flex justify-between items-start bg-white mt-4 p-5 rounded-xl shadow`;
+    div.className = `all_jobs_section flex flex-col lg:flex-row md:flex-row justify-between items-start bg-white mt-4 p-5 rounded-xl shadow`;
     div.innerHTML = `
         <!-- left side -->
         <div class="left_side space-y-5">
           <!-- part-1 -->
           <div>
             <h4 id="mobile_first_corp" class="company_name text-xl font-semibold">${interview.companyName}</h4>
-            <p id="react_native" class="skill text-gray-500">${interview.skillHave}</p>
+            <p class="skill text-gray-500">${interview.skillHave}</p>
           </div>
           <!-- part-2 -->
           <div>
@@ -235,22 +240,30 @@ function addingInterview() {
           <!-- part-3 -->
           <div>
             <p class="clicked bg-white text-green-500 border border-green-500 inline-block py-2 px-3 rounded-lg mb-2">${interview.clickedButton}</p>
-            <p  class="paragraphs text-gray-600">${interview.paragraphsHave}</p>
+            <p class="paragraphs text-gray-600">Build cross-platform mobile applications using React Native. Work on
+              products used by millions of users
+              worldwide.</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button
+           <button
               class="interview_btn border bg-green-500 text-white border-green-500 py-2 px-3 rounded-md  hover:cursor-pointer">Interview</button>
             <button
               class="reject_btn border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer">Rejected</button>
-            <button
-              class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
+            <!-- <button
+              class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button> -->
           </div>
         </div>
+
         <!-- right side -->
-        <div class="right_side p-3 bg-white border border-[#F1F2F4] rounded-full hover:cursor-pointer hidden lg:block ">
-          <button id="delete" class="hover:cursor-pointer lg:block sm:hidden"><i
-              class="fa-regular fa-trash-can inline-block"></i></button>
+        <div class="right_side mt-4 lg:mt-0">
+          <button class="flex justify-center items-center gap-2
+                 border border-red-500 py-2 px-3 rounded-md text-red-500
+                 lg:border lg:border-gray-200 lg:bg-white lg:text-black lg:px-4 lg:py-2 lg:rounded-full
+                  md:border md:border-gray-200 md:bg-white md:text-black md:px-4 md:py-2 md:rounded-full">
+            <i class="fa-regular fa-trash-can"></i>
+            <span class="lg:hidden md:hidden">Delete</span>
+          </button>
         </div>
     `;
     interviewSection.appendChild(div);
@@ -269,15 +282,14 @@ function renderReject() {
 
     const div = document.createElement("div");
 
-    div.className =
-      "flex justify-between items-start bg-white mt-4 p-5 rounded-xl shadow";
-
+    div.className = `all_jobs_section flex flex-col lg:flex-row md:flex-row justify-between items-start bg-white mt-4 p-5 rounded-xl shadow`;
     div.innerHTML = `
-       <div class="left_side space-y-5">
+        <!-- left side -->
+        <div class="left_side space-y-5">
           <!-- part-1 -->
           <div>
             <h4 id="mobile_first_corp" class="company_name text-xl font-semibold">${reject.companyName}</h4>
-            <p id="react_native" class="skill text-gray-500">${reject.skillHave}</p>
+            <p class="skill text-gray-500">${reject.skillHave}</p>
           </div>
           <!-- part-2 -->
           <div>
@@ -286,22 +298,30 @@ function renderReject() {
           <!-- part-3 -->
           <div>
             <p class="clicked bg-[#ffffff] text-red-500 border border-red-500 inline-block py-2 px-3 rounded-lg mb-2">${reject.clickedButton}</p>
-            <p  class="paragraphs text-gray-600">${reject.paragraphsHave}</p>
+            <p class="paragraphs text-gray-600">Build cross-platform mobile applications using React Native. Work on
+              products used by millions of users
+              worldwide.</p>
           </div>
           <!-- part-4 -->
           <div class="btn-select flex gap-3">
-            <button
+   <button
               class="interview_btn border border-green-500 text-green-500 py-2 px-3 rounded-md hover:cursor-pointer">Interview</button>
             <button
               class="reject_btn border border-red-500 bg-red-500 text-white py-2 px-3 rounded-md hover:cursor-pointer">Rejected</button>
-            <button
-              class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button>
+            <!-- <button
+              class="border border-red-500 py-2 px-3 rounded-md text-red-500 hover:cursor-pointer lg:hidden sm:block">Delete</button> -->
           </div>
         </div>
+
         <!-- right side -->
-        <div class="right_side p-3 bg-white border border-[#F1F2F4] rounded-full hover:cursor-pointer hidden lg:block ">
-          <button id="delete" class="hover:cursor-pointer lg:block sm:hidden"><i
-              class="fa-regular fa-trash-can inline-block"></i></button>
+        <div class="right_side mt-4 lg:mt-0">
+          <button class="flex justify-center items-center gap-2
+                 border border-red-500 py-2 px-3 rounded-md text-red-500
+                 lg:border lg:border-gray-200 lg:bg-white lg:text-black lg:px-4 lg:py-2 lg:rounded-full
+                  md:border md:border-gray-200 md:bg-white md:text-black md:px-4 md:py-2 md:rounded-full">
+            <i class="fa-regular fa-trash-can"></i>
+            <span class="lg:hidden md:hidden">Delete</span>
+          </button>
         </div>
     `;
 
